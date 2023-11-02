@@ -3,6 +3,7 @@ import { ChevronsLeft, MenuIcon, Sidebar } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import UserItems from "./UserItems";
 
 const Navigation = () => {
 
@@ -123,17 +124,17 @@ const Navigation = () => {
         <ChevronsLeft className="h-6 w-6" />
       </div>
       <div>
-        <p>Action items</p>
+        <UserItems/>
       </div>
       <div className="mt-4">
-        I
+        
         <p>Documents</p>
       </div>
       <div
       onMouseDown={handleMouseDown}
       onClick={resetWidth}
         className="opacity-0 group-hover/sidebar:opacity-100
-        transition cursor-ew-resize absolute h-full w-1
+        transition cursor-ew-resize absolute h-full w-1 
           bg-primary/10 right-0 top-0"
 
       />
