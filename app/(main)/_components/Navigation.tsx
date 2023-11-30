@@ -1,14 +1,25 @@
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, Sidebar } from "lucide-react";
+import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Sidebar } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItems from "./UserItems";
+import { useMutation} from "convex/react";
+import { api } from "@/convex/_generated/api";
+import Items from "./Items";
+import { toast } from "sonner";
+import DocumentList from "./DocumentList";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+
 
 const Navigation = () => {
 
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+ 
+  const create = useMutation(api.documents.create);
+
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
@@ -98,7 +109,15 @@ const Navigation = () => {
                 }
                 }}
                
+                const handelCreate = () => {
+                  const promise = create({title: "untitled"});
 
+                  toast.promise(promise, {
+                    loading: "creating new note....",
+                    success: "new note created !",
+                    error: "Failed to create new note",
+                  })
+                }
          
 
   return (
@@ -125,10 +144,45 @@ const Navigation = () => {
       </div>
       <div>
         <UserItems/>
+
+          <Items 
+          label="Search"
+          icon={Search}
+          isSearch
+          onClick={() =>{}}
+
+          />
+
+          <Items 
+          label="Settings"
+          icon={Settings}
+          
+          onClick={() =>{}}
+
+          />
+
+        <Items 
+       onClick={handelCreate}
+       label ="New page"
+       icon = {PlusCircle}
+        />
+
       </div>
       <div className="mt-4">
-        
-        <p>Documents</p>
+       
+       <DocumentList />
+       <Items 
+       onClick={handelCreate}
+       icon={Plus}
+       label="Add new page"
+       />
+       <Popover>
+        <PopoverTrigger>
+          <Items 
+          
+          />
+        </PopoverTrigger>
+       </Popover>
       </div>
       <div
       onMouseDown={handleMouseDown}
