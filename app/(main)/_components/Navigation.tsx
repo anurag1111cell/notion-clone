@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Sidebar } from "lucide-react";
+import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Sidebar, Trash } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
@@ -9,7 +9,8 @@ import { api } from "@/convex/_generated/api";
 import Items from "./Items";
 import { toast } from "sonner";
 import DocumentList from "./DocumentList";
-import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import TrashBox from "./TrashBox";
 
 
 const Navigation = () => {
@@ -177,11 +178,16 @@ const Navigation = () => {
        label="Add new page"
        />
        <Popover>
-        <PopoverTrigger>
+        <PopoverTrigger className="w-full mt-4">
           <Items 
-          
+          label="Trash" icon={Trash}
           />
         </PopoverTrigger>
+        <PopoverContent 
+        className="p-0 w-72"
+        side={isMobile ? "bottom" : "right"}  >
+          <TrashBox />
+        </PopoverContent>
        </Popover>
       </div>
       <div
