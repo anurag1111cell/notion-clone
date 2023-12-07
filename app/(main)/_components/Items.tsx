@@ -98,7 +98,7 @@ const Items = ({
         <div
         role="button"
          className="h-full rounded-sm hover:bg-netural-300
-        dark:bg-neutral-600 mr-1"
+        dark:hover:bg-neutral-600 mr-1"
         onClick={handleExpand}
         >
           <ChevronIcon
@@ -123,7 +123,7 @@ const Items = ({
       select-none items-center rounded gap-1 border bg-muted 
       px-1.5 font-mono text-[10px] font-medium text-muted-foreground
       opacity-100">
-        <span className="text-xs">ctrl</span>k
+        <span className="text-xs">ctrl</span>K
        
         </kbd>
      )}

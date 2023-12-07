@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider"
 import { CLIENT_RENEG_LIMIT } from 'tls'
 import { ConvexClientProvider } from '@/components/providers/convex-provider'
 import { Toaster } from 'sonner'
+import { ModalProvider } from '@/components/providers/model-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,6 +37,7 @@ export default function RootLayout({
             storageKey="jotion-theme-2"
           >
             <Toaster position="bottom-center" />
+            <ModalProvider />
         {children}
         </ThemeProvider>
         </ConvexClientProvider>

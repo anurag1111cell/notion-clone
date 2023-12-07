@@ -12,9 +12,11 @@ import DocumentList from "./DocumentList";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import TrashBox from "./TrashBox";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-setting";
 
 
 const Navigation = () => {
+  const setting = useSettings();
   const search = useSearch();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -159,7 +161,7 @@ const Navigation = () => {
           label="Settings"
           icon={Settings}
           
-          onClick={() =>{}}
+          onClick={setting.onOpen}
 
           />
 
