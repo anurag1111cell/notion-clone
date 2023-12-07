@@ -1,6 +1,13 @@
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Sidebar, Trash } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { ChevronsLeft,
+    MenuIcon,
+    Plus, 
+    PlusCircle, 
+    Search, 
+    Settings, 
+    Sidebar, 
+    Trash } from "lucide-react";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItems from "./UserItems";
@@ -8,14 +15,19 @@ import { useMutation} from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Items from "./Items";
 import { toast } from "sonner";
+
 import DocumentList from "./DocumentList";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import TrashBox from "./TrashBox";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-setting";
+import { Navbar } from "./navbar";
+
 
 
 const Navigation = () => {
+  const router = useRouter();
+  const params = useParams();
   const setting = useSettings();
   const search = useSearch();
   const pathname = usePathname();
@@ -114,14 +126,15 @@ const Navigation = () => {
                 }}
                
                 const handelCreate = () => {
-                  const promise = create({title: "untitled"});
-
+                  const promise = create({title: "untitled"})
+                  .then((documentId) => router.push(`/Documents/${documentId}`))
+                  
                   toast.promise(promise, {
                     loading: "creating new note....",
                     success: "new note created !",
                     error: "Failed to create new note",
-                  })
-                }
+                  });
+                };
          
 
   return (
@@ -211,9 +224,17 @@ isMobile && "left-0 w-full"
 )}
 >
 
+{!!params.documentId ? (
+          <Navbar
+            isCollapsed={isCollapsed}
+            onResetWidth={resetWidth}
+          />
+        ) : (
+
   <nav className="bg-transparent px-3 py-2 w-full">
     {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className="h-6 w-6 text-muted-foreground"/>}
   </nav>
+  ) }
 </div>
 </>
 

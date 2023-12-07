@@ -26,7 +26,7 @@ const TrashBox = () => {
     });
 
     const onClick =(documentId:string) =>{
-        router.push(`/documents/${documentId}`);
+        router.push(`/Documents/${documentId}`);
 
     };
 
@@ -59,7 +59,7 @@ const TrashBox = () => {
         });
 
         if(params.documentId === documentId){
-            router.push("/documents");
+            router.push("/Documents");
         }
     };
 
