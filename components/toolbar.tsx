@@ -59,10 +59,10 @@ export const Toolbar = ({
     }
   };
 
-  const onIconSelect = (icon: string) => {
+  const onIconSelect = (Icon: string) => {
     update({
       id: initialData._id,
-      icon,
+      Icon,
     });
   };
 
@@ -105,7 +105,7 @@ export const Toolbar = ({
               size="sm"
             >
               <Smile className="h-4 w-4 mr-2" />
-              Add icon
+              Add Icon
             </Button>
           </IconPicker>
         )}

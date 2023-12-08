@@ -6,6 +6,8 @@ import { CLIENT_RENEG_LIMIT } from 'tls'
 import { ConvexClientProvider } from '@/components/providers/convex-provider'
 import { Toaster } from 'sonner'
 import { ModalProvider } from '@/components/providers/model-provider'
+import { EdgeStoreProvider } from '../lib/edgestore';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
+          <EdgeStoreProvider>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -40,6 +43,7 @@ export default function RootLayout({
             <ModalProvider />
         {children}
         </ThemeProvider>
+        </EdgeStoreProvider>
         </ConvexClientProvider>
         </body>
     </html>
