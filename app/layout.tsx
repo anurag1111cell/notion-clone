@@ -14,10 +14,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Jotion',
   description: 'creative , learning and daily management tool',
-  icons:{
+  icons: {
     icon: {
-      url:"/logo.svg",
-      href:"/logo.svg",
+      url: "/logo.svg",
+      href: "/logo.svg",
     }
   }
 }
@@ -32,20 +32,20 @@ export default function RootLayout({
       <body className={inter.className}>
         <ConvexClientProvider>
           <EdgeStoreProvider>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="jotion-theme-2"
-          >
-            <Toaster position="bottom-center" />
-            <ModalProvider />
-        {children}
-        </ThemeProvider>
-        </EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="jotion-theme-2"
+            >
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
-        </body>
+      </body>
     </html>
   )
 }

@@ -1,56 +1,55 @@
-"use client"
-import { Button } from '@/components/ui/button'
-import { useUser } from '@clerk/clerk-react'
-import { PlusCircle } from 'lucide-react'
-import Image from 'next/image'
-import React from 'react'
-import { useMutation} from 'convex/react'
-import { api } from '@/convex/_generated/api'
-import { toast } from 'sonner'
+"use client";
 
+import Image from "next/image";
+import { useUser } from "@clerk/clerk-react";
+import { PlusCircle } from "lucide-react";
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-const documentPage = () => {
-const {user} = useUser();
-const create = useMutation(api.documents.create);
+import { api } from "@/convex/_generated/api";
+import { Button } from "@/components/ui/button";
 
-const onCreate =()=>{
-  const promise = create({title: "untitled"})
+const DocumentsPage = () => {
+  const router = useRouter();
+  const { user } = useUser();
+  const create = useMutation(api.documents.create);
 
-  toast.promise(promise,{
-    loading: "Creating a new note...",
-    success: "New note Created! ",
-    error:  "Failed to create a note."
-  })
-}
+  const onCreate = () => {
+    const promise = create({ title: "Untitled" })
+      .then((documentId) => router.push(`/Documents/${documentId}`))
 
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note."
+    });
+  };
+  /* trunk-ignore(git-diff-check/error) */
   return (
-    <div className="h-full  justify-center flex items-center flex-col space-y-4">
-      <Image 
-      src="/empty.svg"
-      width={300}
-      height={300}
-      alt='empty'
-      className="dark:hidden"
+    <div className="h-full flex flex-col items-center justify-center space-y-4">
+      <Image
+        src="/empty.svg"
+        height="300"
+        width="300"
+        alt="Empty"
+        className="dark:hidden"
       />
-
-<Image 
-      src="/empty-dark.svg"
-      width={300}
-      height={300}
-      alt='empty'
-      className="hidden dark:block"
+      <Image
+        src="/empty-dark.svg"
+        height="300"
+        width="300"
+        alt="Empty"
+        className="hidden dark:block"
       />
-
       <h2 className="text-lg font-medium">
-      Welcome to {user?.firstName}&apos;s Jotion 
+        Welcome to {user?.firstName}&apos;s Jotion
       </h2>
-      <Button onClick={onCreate} >
-        <PlusCircle className="h-4 w-4 mr-2"/>
-        Create a Note
+      <Button onClick={onCreate}>
+        <PlusCircle className="h-4 w-4 mr-2" />
+        Create a note
       </Button>
-
     </div>
-  )
+   );
 }
-
-export default documentPage
+export default DocumentsPage;
